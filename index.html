@@ -255,6 +255,46 @@
       opacity: 1;
     }
 
+    /* Tech Stack Guide Highlighting */
+    .tech-guide {
+      background: linear-gradient(135deg, rgba(124, 92, 252, 0.1), rgba(0, 212, 255, 0.05));
+      border: 1px solid var(--accent-violet);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+    }
+    
+    .tech-guide h3 {
+      color: var(--accent-cyan);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .tech-column {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .tech-label {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-yellow);
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
     /* Footer */
     footer {
       text-align: center;
@@ -322,6 +362,53 @@
         </div>
       </div>
     </section>
+
+    <div class="tech-guide reveal">
+      <h3>🚀 Core Tech Stack & System Logic</h3>
+      <p style="margin-bottom: 2rem;"><strong>Guidewire Cloud Platform</strong> integrated with a <strong>Python ML Oracle</strong> for pricing & fraud detection. A fully decoupled, scalable, and real-time system.</p>
+      
+      <div class="tech-row">
+        <div class="tech-column">
+          <span class="tech-label">Core Insurance (GWCP Engine)</span>
+          <div class="tech-desc">
+            <ul>
+              <li><strong>Advanced Product Designer (APD):</strong> Defines insurance product (coverage, rules, exclusions)</li>
+              <li><strong>PolicyCenter:</strong> Handles policy lifecycle: quoting, pricing, issuance</li>
+              <li><strong>ClaimCenter + Autopilot:</strong> Executes zero-touch, instant payouts via parametric triggers</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-column">
+          <span class="tech-label">Jutro (Frontend)</span>
+          <div class="tech-desc">
+            <ul>
+              <li><strong>Rider App:</strong> Onboarding, 3-tier plans, and policy interaction</li>
+              <li><strong>Admin Dashboard:</strong> Real-time risk monitoring & fraud logs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-row">
+        <div class="tech-column">
+          <span class="tech-label">AI Risk Pricing (FastAPI)</span>
+          <div class="tech-desc">
+            <ul>
+              <li><strong>Gradient Boosting model:</strong> Uses 5-day weather data</li>
+              <li><strong>Outputs:</strong> Dynamic Risk Multiplier for micro-premiums</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tech-column">
+          <span class="tech-label">Fraud Detection Engine</span>
+          <div class="tech-desc">
+            <ul>
+              <li><strong>Isolation Forest model:</strong> Unsupervised learning to detect spoofing & spatial anomalies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section id="guidewire" class="reveal">
       <h2>Target Persona & The Guidewire Advantage</h2>
@@ -430,6 +517,11 @@
       <h2>⚙️ System Blueprint & API Contracts</h2>
       <p style="color: var(--text-secondary); margin-bottom: 1rem;">Core microservice endpoints hosted on our external Python FastAPI Oracle:</p>
       
+      <div class="ui-image-wrapper">
+        <div style="background: rgba(124, 92, 252, 0.1); padding: 10px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent-violet); text-align: center;">Conceptual Blueprint: End-to-End Payout Logic</div>
+        <img src="./img.png" alt="Phase 1 Conceptual Blueprint Diagram" />
+      </div>
+
       <div class="grid">
         <div class="card">
           <h4>1. Actuarial Pricing Endpoint</h4>
@@ -523,7 +615,6 @@ Payload: { "user_audio_blob": "...", "language": "ta-IN" }</code></pre>
   </footer>
 
   <script>
-    // Scroll Reveal Animation
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -537,7 +628,6 @@ Payload: { "user_audio_blob": "...", "language": "ta-IN" }</code></pre>
       observer.observe(reveal);
     });
 
-    // Active Nav Update
     const sections = document.querySelectorAll('section[id], header[id]');
     const navLinks = document.querySelectorAll('.nav-links a');
     
