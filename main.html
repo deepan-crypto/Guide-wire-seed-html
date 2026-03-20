@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚡ RiskWire — AI-Powered Parametric Income Protection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050a14;
+      --glass: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --glass-hover: rgba(255, 255, 255, 0.09);
+      --accent-cyan: #00d4ff;
+      --accent-violet: #7c5cfc;
+      --accent-orange: #ff6b35;
+      --accent-green: #00e5a0;
+      --accent-yellow: #ffd166;
+      --text-primary: #f0f4ff;
+      --text-secondary: rgba(240, 244, 255, 0.7);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-primary);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--text-primary);
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(5, 10, 20, 0.8);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--glass-border);
+      z-index: 1000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent-yellow);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .nav-links a.active, .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 6rem 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding-top: 10rem;
+      padding-bottom: 5rem;
+      text-align: center;
+      background: radial-gradient(circle at 50% 0%, rgba(124, 92, 252, 0.15) 0%, transparent 50%);
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, var(--text-primary), var(--accent-cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 800px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--glass);
+      border: 1px solid var(--accent-violet);
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-violet);
+      margin-bottom: 2rem;
+    }
+
+    /* Glass Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      background: var(--glass-hover);
+      transform: translateY(-5px);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent-cyan);
+      opacity: 0.5;
+    }
+
+    .card.violet::before { background: var(--accent-violet); }
+    .card.orange::before { background: var(--accent-orange); }
+    .card.green::before { background: var(--accent-green); }
+
+    .card h3 {
+      font-size: 1.4rem;
+      color: var(--text-primary);
+    }
+
+    /* Code Blocks / API Contracts */
+    pre {
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent-green);
+      margin: 1rem 0;
+    }
+
+    .endpoint-method {
+      color: var(--accent-orange);
+      font-weight: bold;
+    }
+
+    /* Custom Lists */
+    ul {
+      list-style: none;
+      margin-left: 0;
+    }
+    
+    ul li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-secondary);
+    }
+    
+    ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+    }
+
+    /* Roadmap Checklist */
+    .roadmap-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      background: var(--glass);
+      border-radius: 12px;
+    }
+    .roadmap-status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem;
+    }
+    .status-done { color: var(--accent-green); }
+    .status-pending { color: var(--accent-yellow); }
+
+    /* UI Image Container */
+    .ui-image-wrapper {
+      width: 100%;
+      margin: 3rem 0;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      background: #000;
+    }
+
+    .ui-image-wrapper img {
+      width: 100%;
+      display: block;
+      height: auto;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .ui-image-wrapper:hover img {
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+    
+    .team-highlight {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    /* Animation Classes */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="brand">⚡ RiskWire</div>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#innovation">Innovation</a>
+      <a href="#jutro">Jutro UI</a>
+      <a href="#crisis">Crisis Protocol</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#roadmap">Roadmap</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header class="hero reveal active" id="overview">
+      <div class="badge">Submission for Guidewire DEVTrails 2026 – Phase 1 (Seed)</div>
+      <h1>AI-Powered Parametric Income Protection</h1>
+      <p>Replacing the outdated, manual P&C claims process with an autonomous safety net that protects a gig worker's earning capacity and pays out instantly.</p>
+    </header>
+
+    <section class="reveal">
+      <div class="grid">
+        <div class="card orange">
+          <h3>1. The Problem Statement</h3>
+          <p>Gig workers form the backbone of quick-commerce, yet they are the most financially vulnerable. During extreme conditions (heatwaves, floods, pollution), they face a tough decision: work in unsafe conditions OR lose their daily income.</p>
+          <p>Traditional insurance fails them. This leads to extreme income instability and severe safety risks.</p>
+        </div>
+        
+        <div class="card green">
+          <h3>2. The Solution: RiskWire</h3>
+          <p>RiskWire is an AI-powered, parametric micro-insurance product built natively on the <strong>Guidewire Cloud Platform (GWCP)</strong> designed for instant support.</p>
+          <p>No paperwork, no delays, no manual intervention. Automatically triggers payouts without manual claims when riders are forced offline.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="guidewire" class="reveal">
+      <h2>Target Persona & The Guidewire Advantage</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Target: Quick-Commerce</h3>
+          <p>Our primary focus is on hyper-local delivery partners (Platforms: Swiggy, Zomato). They are highly vulnerable to localized disruptions.</p>
+          <ul>
+            <li>Real-time operational data is available.</li>
+            <li>Lost income is easy to quantify.</li>
+            <li>Disruptions are hyper‑local and instantly visible.</li>
+          </ul>
+        </div>
+        
+        <div class="card cyan">
+          <h3>Why GWCP?</h3>
+          <p>Traditional insurance cannot scale to the gig economy because of high monthly premiums and slow manual claims. We chose GWCP because it provides enterprise primitives:</p>
+          <ul>
+            <li><strong>Dynamic Micro-Premiums:</strong> SaaS-style weekly coverage tiers (Basic, Standard, Pro).</li>
+            <li><strong>Scalable Frontend:</strong> Accessible, mobile-first experience for riders in high-motion environments.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="innovation" class="reveal">
+      <h2>🔥 The Innovation Edge (Our USPs)</h2>
+      <div class="grid">
+        <div class="card violet">
+          <h3>A. Dynamic 3-Tier Business Model</h3>
+          <p>Flexible subscription model (Basic, Standard, Pro). Premiums are adjusted using an <strong>AI-based Risk Multiplier</strong>. Higher risk zones result in a slightly higher premium, making it affordable and scalable.</p>
+        </div>
+        <div class="card cyan">
+          <h3>B. AI Voice-First Multilingual Assistant</h3>
+          <p>Powered by an In-Context RAG Assistant (Gemini), Vani AI feeds policy Q&A directly to the user in their native language.</p>
+        </div>
+        <div class="card green">
+          <h3>C. Income-Aware Dual Validation</h3>
+          <ul>
+            <li><strong>External Disruption:</strong> Rain > 50mm/hr, Heat > 42°C, AQI > 400.</li>
+            <li><strong>Platform Status:</strong> Aggregator API verifies if order volume dropped or zone is offline.</li>
+          </ul>
+        </div>
+        <div class="card orange">
+          <h3>D. Growth & Security Ecosystem</h3>
+          <p>Referral system for mass adoption coupled with strong authentication & identity validation, and spam call detection.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="jutro" class="reveal">
+      <h2>📱 The Frontend: Jutro Digital Platform</h2>
+      <p style="color: var(--text-secondary); max-width: 800px; margin-bottom: 2rem;">We leverage Guidewire’s Jutro framework to build accessible, React-based interfaces tailored for two distinct users: the gig worker in high-motion environments, and the insurer monitoring macro-risks.</p>
+      
+      <div class="ui-image-wrapper">
+        <img src="./Screenshot from 2026-03-19 19-22-54.png" alt="RiskWire Jutro UI Flow Architecture" />
+      </div>
+
+      <div class="grid">
+        <div class="card violet">
+          <h3>A. The Rider Mobile App</h3>
+          <ul>
+            <li><strong>Step 1: Frictionless Onboarding & KYC:</strong> Instant identity verification via DigiLocker/Aadhaar to prevent "ghost rider" accounts. Riders select their specific Q-commerce micro-zone.</li>
+            <li><strong>Step 2: Dynamic Subscription:</strong> The UI displays Basic, Standard, and Pro weekly plans. Prices dynamically fetch the AI-adjusted premium in real-time.</li>
+            <li><strong>Step 3: AI Voice Hub:</strong> A persistent microphone allows riders to ask complex policy questions (e.g., "If it rains tomorrow, how much will I get paid?") and receive instant translated voice replies.</li>
+            <li><strong>Step 4: Zero-Touch Claim Tracker:</strong> A visual pipeline updating automatically: <em>Monitoring Weather ➔ Trigger Met ➔ Validating Shift Status ➔ Payout Sent</em>.</li>
+          </ul>
+        </div>
+        
+        <div class="card cyan">
+          <h3>B. The Admin / Insurer Web Dashboard</h3>
+          <ul>
+            <li><strong>Risk Heatmaps:</strong> Built using Jutro components and Recharts, fed by our Pandas ETL pipeline to show real-time "Insured vs. Uninsured" density maps across city zones.</li>
+            <li><strong>Fraud Audit Log:</strong> Displays real-time blocked transactions flagged by our Anti-Spoofing AI, detailing the exact reason (e.g., "VPN Datacenter IP Detected" or "Mock Location Flagged").</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="crisis" class="reveal">
+      <h2>🚨 Crisis Management Protocols</h2>
+      
+      <div class="card orange" style="margin-bottom: 2rem;">
+        <h3>Server-Side: The Market Crash Protocol</h3>
+        <p>If our Python ML Oracle detects a catastrophic macro-drop in aggregator order volumes (e.g., >70% drop), it triggers the <strong>Dynamic Solvency Protocol</strong> inside Guidewire.</p>
+        <ul>
+          <li><strong>Macro-API Monitoring:</strong> We monitor the macro health of the platforms, not individual behaviors.</li>
+          <li><strong>Pro-Tier Lock & Liquidity Shift:</strong> GWCP locks new 'Pro'/'Standard' tier policies. Active liquidity shifts to subsidize the 'Basic' survival tier.</li>
+          <li><strong>The Zero-Delay Guarantee:</strong> We guarantee 100% instant execution of the Basic tier for minimum-wage survival payouts immediately.</li>
+        </ul>
+      </div>
+
+      <div class="card cyan">
+        <h3>Client-Side: Zero-Trust Anti-Spoofing</h3>
+        <p>Standard GPS is mathematically compromised. RiskWire protects Guidewire ClaimCenter using a Multi-Layered Spatial ML & Hardware Verification Framework.</p>
+        <ul>
+          <li><strong>Hardware-Backed Verification:</strong> Google Play Integrity API blocks emulators and rooted devices.</li>
+          <li><strong>Defeating OS Mocking:</strong> Catching developer settings via <code>Location.isMock()</code> and "Dead Metadata" traps (e.g., exact 0.0000 speeds).</li>
+          <li><strong>Defeating VPN Proxies:</strong> ASN Checks (Telecom vs Datacenter) and Speed of Light (RTT Latency) temporal mismatch blocks.</li>
+          <li><strong>BSSID Clustering:</strong> Exposing syndicates sharing the exact same physical Wi-Fi router MAC address.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="architecture" class="reveal">
+      <h2>⚙️ System Blueprint & API Contracts</h2>
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">Core microservice endpoints hosted on our external Python FastAPI Oracle:</p>
+      
+      <div class="grid">
+        <div class="card">
+          <h4>1. Actuarial Pricing Endpoint</h4>
+          <pre><code><span class="endpoint-method">POST</span> /api/v1/oracle/quote-multiplier
+Payload: { "zone_id": "Z-401", "rider_id": "R-992", "tier": "PRO" }</code></pre>
+          <p style="font-size: 0.9rem;">Runs Gradient Boosting model against 5-day weather forecast; returns dynamic price multiplier.</p>
+        </div>
+        
+        <div class="card">
+          <h4>2. Anti-Spoofing Fraud Endpoint</h4>
+          <pre><code><span class="endpoint-method">POST</span> /api/v1/oracle/verify-claim
+Payload: { "claim_id": "C-102", "gps_lat": 13.08, "is_mock": false }</code></pre>
+          <p style="font-size: 0.9rem;">Isolation Forest ML model evaluates spatial-network data; returns confidence score.</p>
+        </div>
+
+        <div class="card">
+          <h4>3. Market Crash Monitor</h4>
+          <pre><code><span class="endpoint-method">GET</span> /api/v1/oracle/market-health/chennai</code></pre>
+          <p style="font-size: 0.9rem;">Hourly GWCP Cron Job checks aggregator drop >70% to trigger Solvency Protocol.</p>
+        </div>
+
+        <div class="card">
+          <h4>4. AI Voice Assistant</h4>
+          <pre><code><span class="endpoint-method">POST</span> /api/v1/vani/ask
+Payload: { "user_audio_blob": "...", "language": "ta-IN" }</code></pre>
+          <p style="font-size: 0.9rem;">Gemini 1.5 Flash (RAG) processes localized audio query based on hard-coded policy rules.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal">
+      <h2>💻 GWCP Solution Architecture Deep Dive</h2>
+      <div class="grid">
+        <div class="card violet">
+          <h3>A. Core Systems (GWCP Engine)</h3>
+          <ul>
+            <li><strong>Advanced Product Designer (APD):</strong> Defines rules & exclusions.</li>
+            <li><strong>Policy Center:</strong> Handles quoting, pricing, issuance.</li>
+            <li><strong>Claim Center + Autopilot:</strong> Executes zero-touch payouts.</li>
+          </ul>
+        </div>
+        <div class="card cyan">
+          <h3>B. Actuarial Oracle (Python FastAPI)</h3>
+          <ul>
+            <li><strong>AI Risk Pricing:</strong> Gradient Boosting Regressor prevents non-linear risk compounding.</li>
+            <li><strong>Fraud Detection:</strong> Isolation Forest unsupervised learning model isolates spatial-network anomalies.</li>
+            <li><strong>In-Context RAG:</strong> Gemini 1.5 Flash securely scopes LLM boundaries to policy data.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="reveal">
+      <h2>🚀 Phase 1 to 3 Execution Roadmap</h2>
+      
+      <div class="roadmap-item">
+        <div class="roadmap-status status-done">[X]</div>
+        <div>
+          <h4>Phase 1: Ideation & Foundation (Seed)</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);"><strong>Theme:</strong> Ideate & Know Your Delivery Worker</p>
+          <p><strong>Completed:</strong> Finalized GWCP architecture, Jutro frontend strategy, Voice AI inclusion, Market Crash protocol, and the Multi-Layered Anti-Spoofing defense.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-status status-pending">[ ]</div>
+        <div>
+          <h4>Phase 2: Automation & Protection (Soar)</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);"><strong>Theme:</strong> Protect Your Worker</p>
+          <p><strong>Next Steps:</strong> Scaffold Jutro application. Configure APD and PolicyCenter for weekly terms. Build the Python FastAPI Oracle and link it via the Guidewire Integration Gateway.</p>
+        </div>
+      </div>
+
+      <div class="roadmap-item">
+        <div class="roadmap-status status-pending">[ ]</div>
+        <div>
+          <h4>Phase 3: Scale & Optimise (Scale)</h4>
+          <p style="font-size: 0.9rem; color: var(--text-secondary);"><strong>Theme:</strong> Perfect For Your Worker</p>
+          <p><strong>Upcoming:</strong> Implement ClaimCenter Autopilot logic. Refine the Voice-to-Voice UX. Record the end-to-end zero-touch claim demo demonstrating GWCP's power.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>*** Built by <span class="team-highlight">Team INNOVEX</span> (Deepan G, Saravanakarthiek S, Sairam D, Anumitha V) for the Guidewire DEVTrails 2026 Hackathon.</p>
+      <p style="margin-top: 0.5rem; font-style: italic;">The protection gap has been identified. Now, we build.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll Reveal Animation
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => {
+      observer.observe(reveal);
+    });
+
+    // Active Nav Update
+    const sections = document.querySelectorAll('section[id], header[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        const sectionTop = s.offsetTop;
+        if (pageYOffset >= sectionTop - 150) {
+          current = s.getAttribute('id');
+        }
+      });
+      
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
